@@ -1,0 +1,31 @@
+# print("Digite o seu nome completo:")
+# nome = (input("Nome: "))
+# print("Seu nome em uppercase é:",nome.upper())
+# print("Seu nome em lowercase é:",nome.lower())
+# print("Seu nome em title é:",nome.title())
+
+# print(" Digite agora 4 nomes:")
+# print("Digite o 1º Nome:")
+# nome1 = (input("Nome: "))
+# print("Digite o 2º Nome:")
+# nome2 = (input("Nome: "))
+# print("Digite o 3º Nome:")
+# nome3 = (input("Nome: "))
+# print("Digite o 4º Nome:")
+# nome4 = (input("Nome: "))
+
+
+# print (f"Ordem alfábéica {sorted([nome1.title(), nome2.title(), nome3.title(), nome4.title()])}")
+
+# stro = input("Digite um texto com espaços: ")
+# print("==  Manipulação de espaços  ==")
+# print (f"Removendo os espaços a direta: {stro.rstrip()}")
+# print (f"Removendo os espaços a esquerda: {stro.lstrip()}")
+# print (f"Removendo os espaços dos dois lados: {stro.strip()}")
+# print (f"Removendo os espaços dos do meio: {stro.split()}")
+# print (f"Adicionando espaços a cada palavra: {" ".join(stro)}")
+
+# str02 = ("  Alice  ")
+# print ("\n=== Métodos de Substituição ===")
+# print (f"Subsituindo A por B: {str02.replace("A", "B")} ")
+# print(f"Substituindo espaços por Hífen: {str02.replace(" ", "-")}")
