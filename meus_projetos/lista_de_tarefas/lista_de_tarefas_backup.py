@@ -1,130 +1,148 @@
-#abre a lista principal
 lista_de_tarefas = []
-lixeira_de_tarefas = []
-def inicializar_funcao():
-    ver_tarefas()
-    if not lista_de_tarefas:
-        print("\n\033[31mNenhuma Tarefa Registrada!\033[0m")
-    return
-#Função que pede a tarefa e adiciona ela a lista principal
-def adicionar_tarefa():
-    tarefa = input("\nDigite a tarefa:").strip()
+tarefas_concluidas = []
+
+erro_operacao = ("\n\033[31mOperação Inválida, Digite um Número de 0 a 6!\033[0m")
+erro_operacao_reset = ("\n\033[31mOperação Inválida, (s), para sim e (n), para não!\033[0m")
+erro_tarefa = ("\n\033[31mDigite Uma Tarefa Válida!\033[0m")
+erro_numtarefa = ("\n\033[31mNúmero da Tarefa Inválido!\033[0m")
+erro_notarefa = ("\n\033[31mNenhuma Tarefa Registrada!\033[0m")
+erro_notarefa_concluida = ("\n\033[31mNenhuma Tarefa foi Concluída!\033[0m")
+erro_notreset = ("\n\033[31mNão a nada para Resetar!\033[0m")
+erro_reset = ("\n\033[31mO progama Não foi Resetado!\033[0m")
+true_addtarefa = ("\n\033[32mTarefa Adicionada com Sucesso!\033[0m")
+true_altertarefa = ("\n\033[32mTarefa Alterada com Sucesso!\033[0m")
+true_deltarefa = ("\n\033[32mTarefa Concluída com Sucesso!\033[0m")
+true_reset = ("\n\033[32mProgama resetado com SUCESSO!\033[0m")
+exit = ("\n\033[33m-----Programa-Encerrado-----\033[0m")
+
+def inserir_tarefa():
+    tarefa = input("Digite a Tarefa que deseja adicionar: ").strip()
     if tarefa and not tarefa.isdigit() and not tarefa.isspace():
         lista_de_tarefas.append(tarefa)
-        print(f"\n\033[32mTarefa Adicionada com Sucesso!\033[0m")
-        return menu
+        print (true_addtarefa)
+        return
     else:
-        print("\n\033[31mDigite uma tarefa Válida!\033[0m")
+        print (erro_tarefa)
+        return
 
-#Função que verifica se existe alguma tarefa na lista principal e depois as exibe com seu índice + 1
 def ver_tarefas():
-    if not lista_de_tarefas:
-        print("\n\033[31mNenhuma Tarefa Registrada! \033[0m")
-        return menu()
-    print("\n-----Tarefas-Registradas-----")
-    for i,t in enumerate(lista_de_tarefas, start = 1):
-        print (f"{i}. {t}")
-
-def lixeira():
-    if not lixeira_de_tarefas:
-        print("\n\033[31m Nenhuma Tarefa na lixeira!\033[0m")
-        return menu()
-    print("\n----LIXEIRA----")
-    for i, t in enumerate(lixeira_de_tarefas, start = 1):
-        print (f"{i}. {t}")
-
-def alterar_tarefa():
-    inicializar_funcao()
-    try:
-        numero_altera_tarefa = int(input("Digite o número da tarefa que deseja alterar: "))
-        if numero_altera_tarefa <= 1 or numero_altera_tarefa <= len(lista_de_tarefas):
-            nova_tarefa = input("\nDigite a alteração: ")
-            if nova_tarefa and not nova_tarefa.isdigit() and not nova_tarefa.isspace():
-                lista_de_tarefas[numero_altera_tarefa - 1] = nova_tarefa
-                print (f"\n\033[32mA tarefa {numero_altera_tarefa} foi Alterada com sucesso!\033[0m")
-            else:
-                print("\n\033[31mDigite uma tarefa Válida!\033[0m")
-        else:
-            print("\n\033[31m-----Digite um número Válido!-----\033[0m")
-            return alterar_tarefa
-    except ValueError:
-        print("\n\033[31mEscreve direito animal\033[0m")
-#Função que remove uma tarefa especifica da lista por meio do .pop
-def concluir_tarefa():
-    ver_tarefas()
     if lista_de_tarefas:
-        try:
-            numero_tarefa = int(input("Digite o número da Tarefa que deseja concluir: "))
-            #verifica se existe uma tarefa do numero digitado
-            if 1 <= numero_tarefa <= len(lista_de_tarefas):
-                remover = lista_de_tarefas.pop(numero_tarefa - 1)
-                lixeira_de_tarefas.append(remover)
-                print (f"\n\033[32mA Tarefa {numero_tarefa} foi concluida com Sucesso!\033[0m")
-            else:
-                print("\n\033[31m-----Digite um número Válido!-----\033[0m")
-                return concluir_tarefa()
-        except ValueError:
-            print("\n\033[31mDigite um número Válido!\033[0m")
-            
-    
-#função que apaga todas as tarefas
-
-def clear():
-    ver_tarefas()
-    lixeira_de_tarefas.extend(lista_de_tarefas)#utiliza o extend para passar cada elemento da lista individualmente, para não formar uma matriz!
-    lista_de_tarefas.clear()
-    print("\n\033[32mTodas as Tarefas foram Concluídas!!\033[0m")
-
-def lixeira_clear():
-    if lixeira_de_tarefas:
-        lixeira_de_tarefas.clear()
-        print("\n\033[32mA lixeira foi Esvaziada!\033[0m")
+        print ("\n", 15*"=", "\nLista de tarefas:\n", 15*"=",)
+        for i, j in enumerate(lista_de_tarefas, start= 1):
+            print (f"\n{i}. {j}")
     else:
-        print("\n\033[31mNão há nenhum item na Lixeira!\033[0m")
-#Função que exibe o menu, faz a verificação da opção escolhida e chama a função do caso
+        print (erro_notarefa)
+        return
 
-def menu():
-    print("\n", 10*" =", "\n   Lista de Tarefas:", "\n", 10*" =")
-    print("1. Adicionar tarefa")
-    print("2. Listar tarefas")
-    print("3. Concluir Tarefa")
-    print("4. Concluir Todas as Tarefas")
-    print("5. Alterar Tarefa")
-    print("6. Lixeira")
-    print("7. Esvaziar Lixeira")
-    print("8. Sair")
-    try:
-        opc = int(input("\nDigite uma das operações (1-8): "))
-        if opc < 1 or opc > 8:
-            print("\n\033[31m---Digite um Número entre 1 a 8!---\033[0m")
-        match opc:
-            case 1:
-                adicionar_tarefa()
-            case 2:
-                ver_tarefas()
-            case 3:
-                concluir_tarefa()
-            case 4:
-                clear()
-            case 5:
-                alterar_tarefa()
-            case 6:
-                lixeira()
-            case 7:
-                lixeira_clear()
-            case 8:
-                print ("\n\033[33m---Progama encerrado!---\033[0m")
-                return True
-            case _:
-                print("\n\033[31m---Operação invalida!---\033[0m")
-    except ValueError:
-            print("\n\033[31mEntrada Inválida! Digite um número.\033[0m")
+def del_tarefa():
+    if lista_de_tarefas:
+        ver_tarefas()
+        try:
+            opc = int(input("Digite o número da tarefa que deseja Concluir: ")) 
+            if opc >= 1 and opc <= len(lista_de_tarefas):
+                remover = lista_de_tarefas.pop(opc - 1)
+                tarefas_concluidas.append(remover)
+                print (true_deltarefa)
+                return
+        except ValueError:
+            print (erro_numtarefa)
+            return
+    else:
+        print (erro_notarefa)
+        return
+
+def alter_tarefas():
+    if lista_de_tarefas:
+        ver_tarefas()
+        try:
+            opc = int(input("Digite o número da tarefa que deseja alterar: "))
+            if opc >= 1 and opc <= len(lista_de_tarefas):
+                nova_tarefa = input("\nDigite a alteração: ").strip()
+                if nova_tarefa and not nova_tarefa.isdigit() and not nova_tarefa.isspace():
+                    lista_de_tarefas[opc - 1] = nova_tarefa
+                    print (true_altertarefa)
+                    return
+                else:
+                    print (erro_tarefa)
+                    return
+            else:
+                print (erro_numtarefa)
+                return
+        except ValueError:
+            print (erro_numtarefa)
+    else:
+        print(erro_notarefa)
+        return
+    
+def t_concluidas():
+    print ("\n", 15*"=", "\nTarefas Concluídas:\n", 15*"=",)
+    if tarefas_concluidas:
+        for i, j in enumerate(tarefas_concluidas, start= 1):
+            print (f"{i}. {j}")
+        return
+    else:
+        print (erro_notarefa_concluida)
+        return
+
+def reset():
+    if not lista_de_tarefas and not tarefas_concluidas:
+        print(erro_notreset)
+        return
+    else:
+        opc = input("\nTem certeza que deseja resetar o progama?\n\033[31misso apagará todas as tarefas pendendes e as concluídas!\033[0m\nDigite (s), para sim e (n), para não: ").strip()
         
-#Chama o código todo
+        if opc.lower() == "s":
+            lista_de_tarefas.clear()
+            tarefas_concluidas.clear()
+            print (true_reset)
+            return
+        elif opc.lower() == "n":
+            print(erro_reset)
+            return
+        else:
+            print (erro_operacao_reset)
+            return
+            
+def menu():
+    print ("\n", 15*"=", "\nLista de tarefas\n", 15*"=",)
+    print ("0. Sair")
+    print ("1. Inserir Tarefa")
+    print ("2. Ver Tarefas")
+    print ("3. Concluir tarefas")
+    print ("4. Alterar tarefas")
+    print ("5. Tarefas Concluidas")
+    print ("6. Reset")
+    try:
+        global opcmain
+        opcmain = int(input("Digite o número da operação: "))
+        if opcmain >= 0 and opcmain <= 6:
+            return main()
+        else:
+            print(erro_operacao)
+            return
+    except ValueError:
+        print (erro_operacao)
+
+def main():
+    match opcmain:
+        case 0:
+            print (exit)
+            return True
+        case 1:
+            inserir_tarefa()
+        case 2:
+            ver_tarefas()
+        case 3:
+            del_tarefa()
+        case 4:
+            alter_tarefas()
+        case 5:
+            t_concluidas()
+        case 6:
+            reset()
 if __name__ == "__main__":
     sair = False 
     while not sair:
         sair = menu()
-
-
- 
+    
+        
