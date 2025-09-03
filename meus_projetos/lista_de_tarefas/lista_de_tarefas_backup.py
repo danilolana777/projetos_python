@@ -44,6 +44,9 @@ def del_tarefa():
                 tarefas_concluidas.append(remover)
                 print (true_deltarefa)
                 return
+            else:
+                print(erro_numtarefa)
+                return
         except ValueError:
             print (erro_numtarefa)
             return
