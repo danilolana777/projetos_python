@@ -1,3 +1,4 @@
+# Danilo Lana da Silva - INFA
 lista_de_tarefas = []
 tarefas_concluidas = []
 
@@ -12,7 +13,7 @@ erro_reset = ("\n\033[31mO progama Não foi Resetado!\033[0m")
 true_addtarefa = ("\n\033[32mTarefa Adicionada com Sucesso!\033[0m")
 true_altertarefa = ("\n\033[32mTarefa Alterada com Sucesso!\033[0m")
 true_deltarefa = ("\n\033[32mTarefa Concluída com Sucesso!\033[0m")
-true_reset = ("\n\033[32mProgama resetado com SUCESSO!\033[0m")
+true_reset = ("\n\033[32mProgama resetado com Sucesso!\033[0m")
 exit = ("\n\033[33m-----Programa-Encerrado-----\033[0m")
 
 def inserir_tarefa():
@@ -61,7 +62,7 @@ def alter_tarefas():
             opc = int(input("Digite o número da tarefa que deseja alterar: "))
             if opc >= 1 and opc <= len(lista_de_tarefas):
                 nova_tarefa = input("\nDigite a alteração: ").strip()
-                if nova_tarefa and not nova_tarefa.isdigit() and not nova_tarefa.isspace():
+                if nova_tarefa and not nova_tarefa.isdigit() and not nova_tarefa.isspace() and not nova_tarefa == lista_de_tarefas[opc - 1]:
                     lista_de_tarefas[opc - 1] = nova_tarefa
                     print (true_altertarefa)
                     return
@@ -115,6 +116,9 @@ def menu():
     print ("4. Alterar tarefas")
     print ("5. Tarefas Concluidas")
     print ("6. Reset")
+    return recebeop()
+
+def recebeop():
     try:
         global opcmain
         opcmain = int(input("Digite o número da operação: "))
@@ -143,9 +147,10 @@ def main():
             t_concluidas()
         case 6:
             reset()
+        case _:
+            pass
+
 if __name__ == "__main__":
     sair = False 
     while not sair:
-        sair = menu()
-    
-        
+        sair = menu()   
