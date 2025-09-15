@@ -1,4 +1,5 @@
 # Danilo Lana da Silva - INFA
+import os
 lista_de_tarefas = []
 tarefas_concluidas = []
 
@@ -16,7 +17,11 @@ true_deltarefa = ("\n\033[32mTarefa Concluída com Sucesso!\033[0m")
 true_reset = ("\n\033[32mProgama resetado com Sucesso!\033[0m")
 exit = ("\n\033[33m-----Programa-Encerrado-----\033[0m")
 
+def limpar_terminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 def inserir_tarefa():
+    limpar_terminal()
     tarefa = input("Digite a Tarefa que deseja adicionar: ").strip()
     if tarefa and not tarefa.isdigit() and not tarefa.isspace():
         lista_de_tarefas.append(tarefa)
@@ -27,6 +32,7 @@ def inserir_tarefa():
         return
 
 def ver_tarefas():
+    limpar_terminal()
     if lista_de_tarefas:
         print ("\n", 15*"=", "\nLista de tarefas:\n", 15*"=",)
         for i, j in enumerate(lista_de_tarefas, start= 1):
@@ -36,6 +42,7 @@ def ver_tarefas():
         return
 
 def del_tarefa():
+    limpar_terminal()
     if lista_de_tarefas:
         ver_tarefas()
         try:
@@ -56,6 +63,7 @@ def del_tarefa():
         return
 
 def alter_tarefas():
+    limpar_terminal()
     if lista_de_tarefas:
         ver_tarefas()
         try:
@@ -79,6 +87,7 @@ def alter_tarefas():
         return
     
 def t_concluidas():
+    limpar_terminal()
     print ("\n", 15*"=", "\nTarefas Concluídas:\n", 15*"=",)
     if tarefas_concluidas:
         for i, j in enumerate(tarefas_concluidas, start= 1):
@@ -89,6 +98,7 @@ def t_concluidas():
         return
 
 def reset():
+    limpar_terminal()
     if not lista_de_tarefas and not tarefas_concluidas:
         print(erro_notreset)
         return
